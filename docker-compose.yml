@@ -97,6 +97,9 @@ services:
       # Default would be noreply-{token}@<ZULIP_HOST>; keep it on a domain the
       # SMTP provider has verified as a sender.
       SETTING_TOKENIZED_NOREPLY_EMAIL_ADDRESS: ${TOKENIZED_NOREPLY_EMAIL_ADDRESS:?}
+      # Mobile push via Zulip's service; after enabling run manage.py register_server.
+      SETTING_ZULIP_SERVICE_PUSH_NOTIFICATIONS: ${SETTING_ZULIP_SERVICE_PUSH_NOTIFICATIONS:-False}
+      SETTING_ZULIP_SERVICE_SUBMIT_USAGE_STATISTICS: ${SETTING_ZULIP_SERVICE_SUBMIT_USAGE_STATISTICS:-False}
       # Shared 8 GB host: threaded queue workers instead of one process each.
       CONFIG_application_server__queue_workers_multiprocess: ${QUEUE_WORKERS_MULTIPROCESS:-False}
     volumes:

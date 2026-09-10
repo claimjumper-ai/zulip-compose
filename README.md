@@ -56,6 +56,8 @@ operator's stash: SMTP under `smtp_claimjumper.ai/*`, the generated `ZULIP__*` s
 | `SETTING_NOREPLY_EMAIL_ADDRESS` | yes      | Sender address for system mail; must be a verified sender at the SMTP provider |
 | `TOKENIZED_NOREPLY_EMAIL_ADDRESS` | yes    | e.g. `noreply-{token}@claimjumper.ai`; the domain must be verified at the SMTP provider |
 | `LOADBALANCER_IPS`              | no       | default `172.16.0.0/12`                        |
+| `SETTING_ZULIP_SERVICE_PUSH_NOTIFICATIONS` | no | default `False`; see Mobile push below   |
+| `SETTING_ZULIP_SERVICE_SUBMIT_USAGE_STATISTICS` | no | default `False`                     |
 | `QUEUE_WORKERS_MULTIPROCESS`    | no       | default `False` (saves RAM on the shared host) |
 
 Updates: change the compose file, push to `main`, then "Pull and redeploy" the stack in
@@ -83,7 +85,7 @@ notification service (free for small organisations). Add
 then run:
 
 ```bash
-docker exec -u zulip zulip /home/zulip/deployments/current/manage.py register_server
+docker exec -u zulip zulip /home/zulip/deployments/current/manage.py register_server --agree-to-terms-of-service
 ```
 
 Docs: <https://zulip.readthedocs.io/en/stable/production/mobile-push-notifications.html>
