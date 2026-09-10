@@ -51,7 +51,7 @@ Environment variables (see [.env.example](.env.example)):
 | `SETTING_EMAIL_PORT`            | no       | default `587`                                  |
 | `SETTING_EMAIL_USE_TLS`         | no       | default `True` (STARTTLS)                      |
 | `SETTING_NOREPLY_EMAIL_ADDRESS` | yes      | Sender address for system mail; must be a verified sender at the SMTP provider |
-| `ADD_TOKENS_TO_NOREPLY_ADDRESS` | no       | default `False`: all mail from the address above, no `noreply-<token>@` |
+| `TOKENIZED_NOREPLY_EMAIL_ADDRESS` | yes    | e.g. `noreply-{token}@claimjumper.ai`; the domain must be verified at the SMTP provider |
 | `LOADBALANCER_IPS`              | no       | default `172.16.0.0/12`                        |
 | `QUEUE_WORKERS_MULTIPROCESS`    | no       | default `False` (saves RAM on the shared host) |
 

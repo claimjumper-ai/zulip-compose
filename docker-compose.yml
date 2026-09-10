@@ -94,9 +94,9 @@ services:
       SETTING_EMAIL_PORT: ${SETTING_EMAIL_PORT:-587}
       SETTING_EMAIL_USE_TLS: ${SETTING_EMAIL_USE_TLS:-True}
       SETTING_NOREPLY_EMAIL_ADDRESS: ${SETTING_NOREPLY_EMAIL_ADDRESS:?}
-      # False: every mail is sent from NOREPLY_EMAIL_ADDRESS (a verified sender at
-      # the SMTP provider) instead of noreply-<token>@<host>.
-      SETTING_ADD_TOKENS_TO_NOREPLY_ADDRESS: ${ADD_TOKENS_TO_NOREPLY_ADDRESS:-False}
+      # Default would be noreply-{token}@<ZULIP_HOST>; keep it on a domain the
+      # SMTP provider has verified as a sender.
+      SETTING_TOKENIZED_NOREPLY_EMAIL_ADDRESS: ${TOKENIZED_NOREPLY_EMAIL_ADDRESS:?}
       # Shared 8 GB host: threaded queue workers instead of one process each.
       CONFIG_application_server__queue_workers_multiprocess: ${QUEUE_WORKERS_MULTIPROCESS:-False}
     volumes:
