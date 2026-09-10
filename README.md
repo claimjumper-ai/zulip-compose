@@ -34,7 +34,10 @@ Portainer → environment `apps` → Stacks → Add stack → Repository:
 Prerequisites: the Traefik stack is running on the host (network `proxy` exists) and
 DNS for `ZULIP_HOST` points at it.
 
-Environment variables (see [.env.example](.env.example)):
+Environment variables (see [.env.example](.env.example)). The production values live in the
+operator's stash: SMTP under `smtp_claimjumper.ai/*`, the generated `ZULIP__*` secrets under
+`secrets/zulip_postgres_password`, `secrets/zulip_memcached_password`,
+`secrets/zulip_rabbitmq_password`, `secrets/zulip_redis_password`, `secrets/zulip_secret_key`.
 
 | Variable                        | Required | Notes                                          |
 | ------------------------------- | -------- | ---------------------------------------------- |
