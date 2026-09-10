@@ -78,6 +78,7 @@ services:
       - zulip__redis_password
       - zulip__secret_key
       - zulip__email_password
+      - zulip__social_auth_google_secret
     environment:
       SETTING_REMOTE_POSTGRES_HOST: database
       SETTING_MEMCACHED_LOCATION: memcached:11211
@@ -97,6 +98,10 @@ services:
       # Default would be noreply-{token}@<ZULIP_HOST>; keep it on a domain the
       # SMTP provider has verified as a sender.
       SETTING_TOKENIZED_NOREPLY_EMAIL_ADDRESS: ${TOKENIZED_NOREPLY_EMAIL_ADDRESS:?}
+      # Login methods; Google needs SOCIAL_AUTH_GOOGLE_KEY (client id) and the
+      # zulip__social_auth_google_secret secret (client secret).
+      ZULIP_AUTH_BACKENDS: ${ZULIP_AUTH_BACKENDS:-EmailAuthBackend}
+      SETTING_SOCIAL_AUTH_GOOGLE_KEY: ${SOCIAL_AUTH_GOOGLE_KEY:-}
       # Mobile push via Zulip's service; after enabling run manage.py register_server.
       SETTING_ZULIP_SERVICE_PUSH_NOTIFICATIONS: ${SETTING_ZULIP_SERVICE_PUSH_NOTIFICATIONS:-False}
       SETTING_ZULIP_SERVICE_SUBMIT_USAGE_STATISTICS: ${SETTING_ZULIP_SERVICE_SUBMIT_USAGE_STATISTICS:-False}
@@ -137,6 +142,8 @@ secrets:
     environment: ZULIP__SECRET_KEY
   zulip__email_password:
     environment: ZULIP__EMAIL_PASSWORD
+  zulip__social_auth_google_secret:
+    environment: ZULIP__SOCIAL_AUTH_GOOGLE_SECRET
 
 networks:
   proxy:

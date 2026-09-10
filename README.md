@@ -56,6 +56,9 @@ operator's stash: SMTP under `smtp_claimjumper.ai/*`, the generated `ZULIP__*` s
 | `SETTING_NOREPLY_EMAIL_ADDRESS` | yes      | Sender address for system mail; must be a verified sender at the SMTP provider |
 | `TOKENIZED_NOREPLY_EMAIL_ADDRESS` | yes    | e.g. `noreply-{token}@claimjumper.ai`; the domain must be verified at the SMTP provider |
 | `LOADBALANCER_IPS`              | no       | default `172.16.0.0/12`                        |
+| `ZULIP_AUTH_BACKENDS`           | no       | default `EmailAuthBackend`; see Google SSO below |
+| `SOCIAL_AUTH_GOOGLE_KEY`        | no       | Google OAuth client id                         |
+| `ZULIP__SOCIAL_AUTH_GOOGLE_SECRET` | yes   | Google OAuth client secret; may be empty when Google login is off |
 | `SETTING_ZULIP_SERVICE_PUSH_NOTIFICATIONS` | no | default `False`; see Mobile push below   |
 | `SETTING_ZULIP_SERVICE_SUBMIT_USAGE_STATISTICS` | no | default `False`                     |
 | `QUEUE_WORKERS_MULTIPROCESS`    | no       | default `False` (saves RAM on the shared host) |
@@ -76,6 +79,18 @@ and open it in a browser:
 ```bash
 docker exec -u zulip zulip /home/zulip/deployments/current/manage.py generate_realm_creation_link
 ```
+
+## Google SSO
+
+1. Google Cloud Console → APIs & Services → Credentials → Create OAuth client ID, type
+   "Web application", authorized redirect URI `https://zulip.claimjumper.ai/complete/google/`.
+   The OAuth consent screen must exist first (Internal if the org is a Google Workspace,
+   otherwise External with the users added as test users or published).
+2. Stack environment: `ZULIP_AUTH_BACKENDS=EmailAuthBackend,GoogleAuthBackend`,
+   `SOCIAL_AUTH_GOOGLE_KEY=<client id>`, `ZULIP__SOCIAL_AUTH_GOOGLE_SECRET=<client secret>`.
+   Redeploy.
+3. Users log in with a Google account whose email matches their Zulip account. To stop
+   password logins later, drop `EmailAuthBackend` from the list.
 
 ## Mobile push notifications (later)
 
