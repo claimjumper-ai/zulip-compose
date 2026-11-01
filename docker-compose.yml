@@ -68,7 +68,7 @@ services:
       - redis:/data
 
   zulip:
-    image: ghcr.io/zulip/zulip-server:12.2-0
+    image: ghcr.io/zulip/zulip-server:12.3-0
     container_name: zulip
     restart: unless-stopped
     secrets:
